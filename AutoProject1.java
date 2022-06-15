@@ -9,7 +9,7 @@ import java.time.Duration;
 import static io.netty.util.internal.SystemPropertyUtil.contains;
 
 
-public class firstTest {
+public class AutoProject1 {
     public static void main(String[] args) throws InterruptedException {
 
         System.setProperty("webdriver.chrome.driver","/Users/halildikmen/Desktop/browserDrivers/chromedriver");
