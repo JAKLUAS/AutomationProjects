@@ -1,3 +1,5 @@
+package webOrder;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -23,19 +25,20 @@ public abstract class autoProject2 {
         driver.findElement(By.name("ctl00$MainContent$password")). sendKeys("test" );
         driver.findElement(By.name("ctl00$MainContent$login_button")).click();
 
-        Thread.sleep(2000);
-        driver.findElement(new By.ByLinkText("Order")).click();
-        Thread.sleep(2000);
+
+        driver.findElement(By.linkText("Order")).click();
+
         int quantity = 1 + (int) (Math.random() * 101);
+
         String strQuantity = String.valueOf(quantity);
-        Thread.sleep(2000);
-        driver.findElement(By.id("ctl00$MainContent$fmwOrder$txtQuantity")).sendKeys(strQuantity);
+
+        driver.findElement(By.name("ctl00$MainContent$fmwOrder$txtQuantity")).sendKeys(strQuantity);
         driver.findElement(By.className("btn_dark")).click();
-        Thread.sleep(2000);
+
 
         double total = Double.parseDouble(driver.findElement(By.id("ctl00_MainContent_fmwOrder_txtTotal")).getAttribute("value"));
 
-        Thread.sleep(2000);
+
 
         if (quantity >= 10) {
             Assert.assertTrue(total == (quantity * 100 * 0.92));
@@ -43,7 +46,8 @@ public abstract class autoProject2 {
             Assert.assertTrue(total == (quantity * 100));
         }
 
-        Thread.sleep(2000);
+
+
         List<String[]> customers = autoProject21.read("DATA.csv");
         String[] newCustomer = customers.get(1 + (int)Math.random()*customers.size());
 
@@ -52,7 +56,8 @@ public abstract class autoProject2 {
         driver.findElement(By.id("ctl00_MainContent_fmwOrder_TextBox3")).sendKeys(newCustomer[4] + Keys.ENTER);
         driver.findElement(By.id("ctl00_MainContent_fmwOrder_TextBox4")).sendKeys(newCustomer[5] + Keys.ENTER);
         driver.findElement(By.id("ctl00_MainContent_fmwOrder_TextBox5")).sendKeys(newCustomer[6] + Keys.ENTER);
-        Thread.sleep(2000);
+
+
         long AmExcard = (long) ((long) 300000000000000l + (Math.random()*99999999999999l));
         long visacard = (long) ((long) 4000000000000000l + (Math.random()*999999999999999l));
         long mastcard = (long) ((long) 5000000000000000l + (Math.random()*999999999999999l));
@@ -73,7 +78,8 @@ public abstract class autoProject2 {
             driver.findElement(By.id("ctl00_MainContent_fmwOrder_cardList_2")).click();
             driver.findElement(By.id("ctl00_MainContent_fmwOrder_TextBox6")).sendKeys( strAmExcard + Keys.ENTER);
         }
-        Thread.sleep(2000);
+
+
         driver.findElement(By.id("ctl00_MainContent_fmwOrder_TextBox1")).sendKeys( "12/24" + Keys.ENTER);
 
         driver.findElement(By.id("ctl00_MainContent_fmwOrder_InsertButton")).click();
@@ -81,7 +87,8 @@ public abstract class autoProject2 {
         String actual = driver.findElement(By.tagName("strong")).getText();
         String expected = "New order has been successfully added.";
         Assert.assertEquals(actual, expected);
-        Thread.sleep(2000);
+
+
         driver.findElement(By.id("ctl00_logout")).click();
 
     }
